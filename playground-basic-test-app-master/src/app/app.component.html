@@ -1,0 +1,45 @@
+
+
+<form class="searchForm">
+    <label for="name">Name:</label><br>
+    <input class="name-class"type="text" id="name" name="name" #name><br>
+    <br>
+
+    <input type="date" id="start" name="trip-start"
+       value="2018-07-22"
+       min="2018-01-01" max="2018-12-31" #date>
+
+     <button type="button" class="search-class" >Search</button>  
+  </form>
+<br><br><br>
+ <table mat-table  [dataSource]="dataSource"  matSort class="mat-elevation-z8">
+    
+    <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> id </th> 
+        <td mat-cell *matCellDef="let element" >   {{element?.resource?.id }} </td>
+      </ng-container> 
+
+    <ng-container matColumnDef="name">
+     <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th> 
+     <td mat-cell *matCellDef="let element" >   {{element?.resource?.name ? formatName(element?.resource?.name) : 'Noname'}} </td>
+   </ng-container> 
+
+
+   <ng-container matColumnDef="birthDate" >
+       <th mat-header-cell *matHeaderCellDef mat-sort-header> birthDate </th>
+       <td mat-cell *matCellDef="let element" >   {{ element?.resource?.birthDate }} </td>
+     </ng-container> 
+
+     <ng-container matColumnDef="gender">
+       <th mat-header-cell *matHeaderCellDef mat-sort-header> gender </th>
+       <td mat-cell *matCellDef="let element">   {{ element?.resource?.gender }} </td>
+     </ng-container> 
+ 
+     
+   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+ </table> 
+
+ <footer class="footer-class">
+     {{ currentTime | date:'shortTime' }}
+ </footer>
